@@ -1,0 +1,49 @@
+{
+  "name": "devcontainer-config-setup",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "overrideCommand": true,
+  "remoteUser": "dev",
+  "workspaceFolder": "/workspaces/devcontainer-config-setup",
+  "features": {
+    "ghcr.io/devcontainer-config/features/user-init:2": {},
+    "ghcr.io/devcontainer-config/features/dot-config:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      // spell-checker:ignore dbaeumer esbenp azuretools zixuanchen
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "streetsidesoftware.code-spell-checker",
+        "zixuanchen.vitest-explorer"
+      ],
+      "settings": {
+        "files.associations": {
+          "ignore": "ignore",
+          "attributes": "properties",
+          "rc": "properties"
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "[dockerfile]": {
+          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+        },
+        "cSpell.autoFormatConfigFile": true,
+        "cSpell.checkOnlyEnabledFileTypes": false,
+        "eslint.experimental.useFlatConfig": true,
+        "eslint.workingDirectories": ["/workspaces"],
+        "typescript.preferences.importModuleSpecifier": "non-relative",
+        "typescript.preferences.includePackageJsonAutoImports": "on",
+        "typescript.tsdk": "/workspaces/node_modules/typescript/lib"
+      }
+    }
+  },
+  "onCreateCommand": "pnpm install && pnpm restore",
+  "postAttachCommand": "pnpm watch --detach"
+}
