@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - WORKSPACES=${WORKSPACES}
+        - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}
     init: true
     volumes:
       - WORKSPACES:${WORKSPACES}
@@ -13,9 +16,12 @@ services:
       - XDG_CACHE_HOME:${XDG_CACHE_HOME}
       - XDG_DATA_HOME:${XDG_DATA_HOME}
       - XDG_STATE_HOME:${XDG_STATE_HOME}
+      - node_modules:${WORKSPACES}/${COMPOSE_PROJECT_NAME}/node_modules
+      - node_modules:${WORKSPACES}/node_modules
 volumes:
   WORKSPACES:
   XDG_CONFIG_HOME:
   XDG_CACHE_HOME:
   XDG_DATA_HOME:
   XDG_STATE_HOME:
+  node_modules:
