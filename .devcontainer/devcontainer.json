@@ -1,10 +1,10 @@
 {
-  "name": "devcontainer-config-setup",
+  "name": "create-devcontainer",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
   "overrideCommand": true,
   "remoteUser": "dev",
-  "workspaceFolder": "/workspaces/devcontainer-config-setup",
+  "workspaceFolder": "/workspaces/create-devcontainer",
   "features": {
     "ghcr.io/devcontainer-config/features/user-init:2": {},
     "ghcr.io/devcontainer-config/features/dot-config:2": {},
@@ -12,13 +12,13 @@
   },
   "customizations": {
     "vscode": {
-      // spell-checker:ignore dbaeumer esbenp azuretools zixuanchen
+      // spell-checker:ignore dbaeumer esbenp azuretools
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker",
         "streetsidesoftware.code-spell-checker",
-        "zixuanchen.vitest-explorer"
+        "vitest.explorer"
       ],
       "settings": {
         "files.associations": {

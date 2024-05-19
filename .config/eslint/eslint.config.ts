@@ -5,6 +5,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 import eslint from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import { gitignore } from "eslint-flat-config-gitignore";
+import nodePlugin from "eslint-plugin-n";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import vitest from "eslint-plugin-vitest";
@@ -42,10 +43,14 @@ export default tsESLint.config(
   {
     files: ["**/*.{ts,tsx,cts,mts}"],
     plugins: {
+      n: nodePlugin,
       "simple-import-sort": simpleImportSort,
       unicorn: eslintPluginUnicorn,
     },
     rules: {
+      "n/no-unsupported-features/es-builtins": "error",
+      "n/no-unsupported-features/es-syntax": "error",
+      "n/no-unsupported-features/node-builtins": "error",
       "import/no-extraneous-dependencies": "error",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": "error",
