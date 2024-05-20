@@ -1,3 +1,4 @@
+// spell-checker:ignore esbenp azuretools dbaeumer
 {
   "name": "create-devcontainer",
   "dockerComposeFile": "docker-compose.yml",
@@ -12,12 +13,11 @@
   },
   "customizations": {
     "vscode": {
-      // spell-checker:ignore dbaeumer esbenp azuretools
       "extensions": [
-        "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker",
         "streetsidesoftware.code-spell-checker",
+        "dbaeumer.vscode-eslint",
         "vitest.explorer"
       ],
       "settings": {
@@ -28,16 +28,17 @@
         },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.codeActionsOnSave": {
-          "source.fixAll.eslint": "explicit"
-        },
         "[dockerfile]": {
           "editor.defaultFormatter": "ms-azuretools.vscode-docker"
         },
         "cSpell.autoFormatConfigFile": true,
         "cSpell.checkOnlyEnabledFileTypes": false,
-        "eslint.experimental.useFlatConfig": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.runtime": "/usr/local/bin/node",
         "eslint.workingDirectories": ["/workspaces"],
+        "eslint.experimental.useFlatConfig": true,
         "typescript.preferences.importModuleSpecifier": "non-relative",
         "typescript.preferences.includePackageJsonAutoImports": "on",
         "typescript.tsdk": "/workspaces/node_modules/typescript/lib"

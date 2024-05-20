@@ -4,5 +4,6 @@
     "typeRoots": ["node_modules/@types"],
     "declaration": true,
     "outDir": "dist/"
-  }
+  },
+  "exclude": ["templates"]
 }

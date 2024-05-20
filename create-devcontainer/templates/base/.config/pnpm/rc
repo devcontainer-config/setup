@@ -1,0 +1,4 @@
+ignore-workspace-root-check=true
+lockfile=false
+resolution-mode=time-based
+store-dir=/home/${remoteUser}/.local/share/pnpm/store

@@ -1,0 +1,20 @@
+{
+  "git": {
+    "attributes": "/home/${remoteUser}/.config/git/attributes",
+    "ignore": "/home/${remoteUser}/.config/git/ignore"
+  },
+  "cspell": {
+    "cspell.json": "cspell.json"
+  },
+  "pnpm": {
+    "rc": "/home/${remoteUser}/.config/pnpm/rc"
+  },
+  "prettier": {
+    ".prettierrc.json": ".prettierrc.json"
+  },
+  "workspaces": {
+    "../git/attributes": ".gitattributes",
+    "../git/ignore": ".gitignore",
+    "package.json": "package.json"
+  }
+}

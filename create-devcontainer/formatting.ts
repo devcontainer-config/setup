@@ -1,6 +1,6 @@
 import * as prettier from "prettier";
 
-import type { Config, ConfigFile } from "./types.js";
+import type { ConfigFile } from "./types.js";
 
 export const prettierConfig: prettier.Config = {
   printWidth: 120,
@@ -9,18 +9,32 @@ export const prettierConfig: prettier.Config = {
 
 export const stringify = (value: unknown): string => JSON.stringify(value, null, 2);
 
-export const prettierFormat = (text: string, filepath: string): Promise<string> =>
-  prettier.format(text, { ...prettierConfig, filepath });
+export const prettierFormat = async (text: string, filepath: string): Promise<string> => {
+  const fileInfo = await prettier.getFileInfo(filepath, prettierConfig);
+  if (fileInfo.inferredParser) {
+    return await prettier.format(text, { ...prettierConfig, filepath });
+  } else {
+    return text;
+  }
+};
 
-export const formatConfigs = async <T extends Config>(configs: T): Promise<ConfigFile[]> => {
+export const formatConfigs = async (configs: Record<string, string>): Promise<ConfigFile[]> => {
   const formattedConfigs: ConfigFile[] = [];
   for (const [key, value] of Object.entries(configs)) {
-    if (typeof value === "string") {
-      formattedConfigs.push({ path: key, content: await prettierFormat(value, key) });
-    } else if (value !== undefined) {
-      const content = value.join("\n\n") + "\n";
-      formattedConfigs.push({ path: key, content });
-    }
+    formattedConfigs.push({ path: key, content: await prettierFormat(value, key) });
   }
   return formattedConfigs;
+};
+
+export const fillTemplate = (template: string, values: Record<string, string>): string => {
+  let result = template;
+  for (const [key, value] of Object.entries(values)) {
+    const pattern = `\${${key}}`;
+    if (template.includes(pattern)) {
+      result = result.replaceAll(pattern, value);
+    } else {
+      throw new Error(`Template does not contain pattern: ${pattern}`);
+    }
+  }
+  return result;
 };

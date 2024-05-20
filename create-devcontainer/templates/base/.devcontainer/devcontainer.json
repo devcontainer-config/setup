@@ -1,0 +1,33 @@
+// spell-checker:ignore esbenp azuretools
+{
+  "name": "${projectName}",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "overrideCommand": true,
+  "remoteUser": "${remoteUser}",
+  "workspaceFolder": "/workspaces/${projectName}",
+  "features": {
+    "ghcr.io/devcontainer-config/features/user-init": {},
+    "ghcr.io/devcontainer-config/features/dot-config": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode", "ms-azuretools.vscode-docker", "streetsidesoftware.code-spell-checker"],
+      "settings": {
+        "files.associations": {
+          "ignore": "ignore",
+          "attributes": "properties",
+          "rc": "properties"
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[dockerfile]": {
+          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+        },
+        "cSpell.autoFormatConfigFile": true,
+        "cSpell.checkOnlyEnabledFileTypes": false
+      }
+    }
+  },
+  "onCreateCommand": "pnpm install"
+}

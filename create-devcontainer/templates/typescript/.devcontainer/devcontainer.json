@@ -1,0 +1,21 @@
+// spell-checker:ignore dbaeumer
+{
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint"],
+      "settings": {
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.runtime": "/usr/local/bin/node",
+        "eslint.workingDirectories": ["/workspaces"],
+        "eslint.experimental.useFlatConfig": true,
+        "typescript.preferences.importModuleSpecifier": "non-relative",
+        "typescript.preferences.includePackageJsonAutoImports": "on",
+        "typescript.tsdk": "/workspaces/node_modules/typescript/lib"
+      }
+    }
+  },
+  "onCreateCommand": "pnpm install && pnpm restore",
+  "postAttachCommand": "pnpm watch --detach"
+}
