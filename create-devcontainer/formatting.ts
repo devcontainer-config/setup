@@ -4,7 +4,7 @@ import type { ConfigFile } from "./types.js";
 
 export const prettierConfig: prettier.Config = {
   printWidth: 120,
-  plugins: ["prettier-plugin-packagejson"],
+  plugins: [import.meta.resolve("prettier-plugin-packagejson")],
 };
 
 export const stringify = (value: unknown): string => JSON.stringify(value, null, 2);

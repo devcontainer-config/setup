@@ -60,11 +60,11 @@ export const createTypeScriptWorkspaceConfigs = async (
         },
         dependencies: {
           ...dependencies,
+          ...commanderVersion,
           eslint: "^8.57.0", // Wait until typescript-eslint updates peer dependencies to ESLint 9
         },
         devDependencies: {
           ...devDependencies,
-          ...commanderVersion,
         },
       }),
     ),

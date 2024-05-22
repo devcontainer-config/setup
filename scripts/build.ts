@@ -1,1 +1,3 @@
-console.log("TODO");
+import { build } from "@/scripts/tasks/build.js";
+
+await build();

@@ -1,5 +1,6 @@
 {
   "name": "create-devcontainer",
+  "version": "0.0.0",
   "description": "TODO",
   "keywords": [
     "create",
@@ -8,17 +9,10 @@
     "setup"
   ],
   "type": "module",
-  "exports": {
-    "development": {
-      "import": "./src/index.ts"
-    },
-    "default": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
-  "bin": "./dist/index.js",
+  "bin": "./index.js",
   "dependencies": {
+    "@commander-js/extra-typings": "^12.1.0",
+    "commander": "~12.1.0",
     "cspell-lib": "^8.8.1",
     "dedent": "^1.5.3",
     "default-composer": "^0.6.0",
