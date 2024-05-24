@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import { readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 

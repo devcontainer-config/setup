@@ -13,7 +13,7 @@
   "dependencies": {
     "@commander-js/extra-typings": "^12.1.0",
     "commander": "~12.1.0",
-    "cspell-lib": "^8.8.1",
+    "cspell-lib": "^8.8.3",
     "dedent": "^1.5.3",
     "default-composer": "^0.6.0",
     "jsonc-parser": "^3.2.1",
@@ -26,7 +26,7 @@
     "type-fest": "^4.18.2"
   },
   "devDependencies": {
-    "@types/node": "^20.12.11",
+    "@types/node": "^20.12.12",
     "@types/pacote": "^11.1.8",
     "@types/semver": "^7.5.8"
   },

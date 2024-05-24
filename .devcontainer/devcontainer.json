@@ -3,8 +3,8 @@
   "name": "create-devcontainer",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
-  "overrideCommand": true,
   "remoteUser": "dev",
+  "overrideCommand": true,
   "workspaceFolder": "/workspaces/create-devcontainer",
   "features": {
     "ghcr.io/devcontainer-config/features/user-init:2": {},

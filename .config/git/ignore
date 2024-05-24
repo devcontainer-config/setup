@@ -8,7 +8,3 @@ _*
 node_modules/
 
 dist/
-!**/templates/**/.devcontainer/
-!**/templates/**/.devcontainer/**
-!**/templates/**/.config/
-!**/templates/**/.config/**
