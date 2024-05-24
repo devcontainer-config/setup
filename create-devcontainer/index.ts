@@ -1,7 +1,8 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
 import { Argument, program } from "@commander-js/extra-typings";
+import writeFileAtomic from "write-file-atomic";
 
 import { createBaseConfigs } from "./configs/base/index.js";
 import { createTypeScriptConfigs } from "./configs/typescript/index.js";
@@ -33,7 +34,7 @@ program
     for (const configFile of configFiles) {
       const filePath = path.resolve(currentPath, configFile.path);
       await mkdir(path.dirname(filePath), { recursive: true });
-      await writeFile(filePath, configFile.content);
+      await writeFileAtomic(filePath, configFile.content);
     }
   });
 

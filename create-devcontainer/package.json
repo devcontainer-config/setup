@@ -23,12 +23,14 @@
     "prettier": "^3.2.5",
     "prettier-plugin-packagejson": "^2.5.0",
     "semver": "^7.6.2",
-    "type-fest": "^4.18.2"
+    "type-fest": "^4.18.2",
+    "write-file-atomic": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
     "@types/pacote": "^11.1.8",
-    "@types/semver": "^7.5.8"
+    "@types/semver": "^7.5.8",
+    "@types/write-file-atomic": "^4.0.3"
   },
   "engines": {
     "node": ">=20"

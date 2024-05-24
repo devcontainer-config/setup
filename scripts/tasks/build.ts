@@ -43,6 +43,6 @@ export const build = async () => {
   await compile();
   await insertShebang(path.resolve(dist, "index.js"));
   await writePackageJson();
-  await cp(path.resolve(projectRoot, pkg.name, "templates"), dist, { recursive: true });
+  await cp(path.resolve(projectRoot, pkg.name, "templates"), path.resolve(dist, "templates"), { recursive: true });
   await copyFile(path.resolve(projectRoot, "ReadMe.md"), path.resolve(dist, "ReadMe.md"));
 };

@@ -5,7 +5,7 @@ branches:
 skip_non_tags: true
 image: Ubuntu2004
 environment:
-  CR_PAT: CR_PAT
+  NPM_TOKEN: NPM_TOKEN
 build_script:
   - sh: >-
       set -e
@@ -19,4 +19,4 @@ deploy_script:
 
       devcontainer up --workspace-folder .
 
-      devcontainer exec --workspace-folder . --remote-env CR_PAT=${CR_PAT} pnpm run publish
+      devcontainer exec --workspace-folder . --remote-env NPM_TOKEN=${NPM_TOKEN} pnpm run publish
