@@ -1,4 +1,5 @@
-import fs from "node:fs/promises";
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
+import fs, { copyFile, cp } from "node:fs/promises";
 import { readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -42,6 +43,6 @@ export const build = async () => {
   await compile();
   await insertShebang(path.resolve(dist, "index.js"));
   await writePackageJson();
-  await $$`cp --recursive ${path.resolve(projectRoot, pkg.name, "templates")} ${dist}`;
-  await $$`cp ${path.resolve(projectRoot, "ReadMe.md")} ${dist}`;
+  await cp(path.resolve(projectRoot, pkg.name, "templates"), dist, { recursive: true });
+  await copyFile(path.resolve(projectRoot, "ReadMe.md"), path.resolve(dist, "ReadMe.md"));
 };

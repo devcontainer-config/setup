@@ -9,7 +9,7 @@ export type BaseConfigs = BaseDevcontainerConfigs & BaseDotConfigs & BaseWorkspa
 
 export const createBaseConfigs = async (projectName: string, remoteUser = "dev"): Promise<BaseConfigs> => {
   const devcontainerConfigs = await createBaseDevcontainerConfigs(projectName, remoteUser);
-  const dotConfigs = await createBaseDotConfigs(remoteUser);
+  const dotConfigs = await createBaseDotConfigs(projectName, remoteUser);
   const workspaceConfigs = await createBaseWorkspaceConfigs();
   return {
     ...devcontainerConfigs,

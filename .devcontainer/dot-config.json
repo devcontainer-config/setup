@@ -15,6 +15,7 @@
   "workspaces": {
     "../git/attributes": ".gitattributes",
     "../git/ignore": ".gitignore",
-    "package.json": "package.json"
+    "../../package.json": "package.json",
+    "pnpm-workspace.yaml": "pnpm-workspace.yaml"
   }
 }
