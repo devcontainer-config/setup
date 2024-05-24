@@ -9,10 +9,10 @@ import semver from "semver";
 import type { PackageJson } from "type-fest";
 
 import prettierOptions from "@/.config/prettier/.prettierrc.json";
-import pkg from "@/create-devcontainer/package.json";
 import { license } from "@/package.json";
-import { projectRoot } from "@/scripts/project.js";
+import { packagePrefix, projectRoot } from "@/scripts/project.js";
 import { $$ } from "@/scripts/shell.js";
+import pkg from "@/setup/package.json";
 
 const dist = path.resolve(projectRoot, pkg.name, "dist");
 
@@ -29,10 +29,11 @@ const writePackageJson = async () => {
   const tags = await git.listTags({ fs, dir: projectRoot });
   const url = (await git.listRemotes({ fs, dir: projectRoot })).at(0)?.url;
   const pkgJson: PackageJson = Object.assign({}, pkg as PackageJson, {
+    name: `${packagePrefix}${pkg.name}`,
     version: semver.rsort(tags).at(0) ?? pkg.version,
-    repository: url && { type: "git", url },
+    ...(url && { repository: { type: "git", url } }),
     license,
-  });
+  } satisfies PackageJson);
   const filepath = path.resolve(dist, "package.json");
   const packageJson = await prettier.format(JSON.stringify(pkgJson), { ...prettierOptions, filepath });
   await writeFile(filepath, packageJson);
