@@ -13,12 +13,12 @@ build_script:
       npm install --global @devcontainers/cli
 
       devcontainer build --workspace-folder .
-
-      devcontainer build --workspace-folder . pnpm build
 deploy_script:
   - sh: >-
       set -e
 
       devcontainer up --workspace-folder .
+
+      devcontainer exec --workspace-folder . pnpm build
 
       devcontainer exec --workspace-folder . --remote-env NPM_TOKEN=${NPM_TOKEN} pnpm run publish
