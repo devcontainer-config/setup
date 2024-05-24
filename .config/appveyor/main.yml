@@ -11,6 +11,8 @@ build_script:
       npm install --global @devcontainers/cli
 
       devcontainer build --workspace-folder .
+
+      devcontainer build --workspace-folder . pnpm build
 test_script:
   - sh: >-
       set -e
