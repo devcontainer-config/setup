@@ -1,11 +1,11 @@
 // spell-checker:ignore esbenp azuretools dbaeumer
 {
-  "name": "setup",
+  "name": "devcontainer-config-setup",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
   "remoteUser": "dev",
   "overrideCommand": true,
-  "workspaceFolder": "/workspaces/setup",
+  "workspaceFolder": "/workspaces/devcontainer-config-setup",
   "features": {
     "ghcr.io/devcontainer-config/features/user-init:2": {},
     "ghcr.io/devcontainer-config/features/dot-config:2": {},
