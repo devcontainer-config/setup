@@ -12,6 +12,9 @@
     "test": "vite-node scripts/test.ts",
     "watch": "vite-node scripts/watch.ts"
   },
+  "resolutions": {
+    "eslint>file-entry-cache": "^8.0.0"
+  },
   "dependencies": {
     "@commander-js/extra-typings": "^12.1.0",
     "@eslint/eslintrc": "^3.1.0",

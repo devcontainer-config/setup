@@ -2,6 +2,7 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
 import { Argument, program } from "@commander-js/extra-typings";
+import { kebabCase } from "lodash-es";
 import writeFileAtomic from "write-file-atomic";
 
 import { createBaseConfigs } from "./configs/base/index.js";
@@ -20,7 +21,7 @@ program
   )
   .action(async (template) => {
     const currentPath = process.cwd();
-    const projectName = path.basename(currentPath) || "project";
+    const projectName = kebabCase(path.basename(currentPath)) || "project";
 
     const baseConfig = await createBaseConfigs(projectName);
 
