@@ -3,14 +3,14 @@
     "attributes": "/home/${remoteUser}/.config/git/attributes",
     "ignore": "/home/${remoteUser}/.config/git/ignore"
   },
-  "cspell": {
-    "cspell.json": "cspell.json"
-  },
   "pnpm": {
     "rc": "/home/${remoteUser}/.config/pnpm/rc"
   },
   "prettier": {
     ".prettierrc.json": ".prettierrc.json"
+  },
+  "cspell": {
+    "cspell.json": "cspell.json"
   },
   "workspaces": {
     "../git/attributes": ".gitattributes",

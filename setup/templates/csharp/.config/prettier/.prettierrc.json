@@ -1,0 +1,12 @@
+{
+  "plugins": ["@prettier/plugin-xml"],
+  "xmlWhitespaceSensitivity": "ignore",
+  "overrides": [
+    {
+      "files": "app.manifest",
+      "options": {
+        "parser": "xml"
+      }
+    }
+  ]
+}

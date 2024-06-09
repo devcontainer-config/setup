@@ -21,7 +21,7 @@ export const getNodeLtsVersions = async (): Promise<number[]> => {
 export const getNodeLatestLtsVersion = async (): Promise<number> => {
   const versions = await getNodeLtsVersions();
   if (versions.length === 0) {
-    throw new Error("No Node LTS versions found");
+    throw new Error("No Node LTS versions found.");
   }
   return versions[0];
 };

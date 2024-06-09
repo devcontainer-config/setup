@@ -1,0 +1,20 @@
+// spell-checker:ignore dotnettools
+{
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-dotnettools.csharp", "csharpier.csharpier-vscode"],
+      "settings": {
+        "files.associations": {
+          "*.globalconfig": "ini"
+        },
+        "[csharp]": {
+          "editor.defaultFormatter": "csharpier.csharpier-vscode"
+        }
+      }
+    }
+  },
+  "onCreateCommand": "pnpm install && pnpm restore"
+}

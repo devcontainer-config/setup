@@ -12,6 +12,7 @@
     "eslint-flat-config-gitignore": "^2.0.0",
     "execa": "^9.1.0",
     "glob": "^10.4.1",
+    "globals": "^15.3.0",
     "prettier": "^3.2.5",
     "prettier-plugin-packagejson": "^2.5.0",
     "syncpack": "^12.3.2",

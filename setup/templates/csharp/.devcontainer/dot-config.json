@@ -1,0 +1,11 @@
+{
+  "csharpier": {
+    ".csharpierrc.json": ".csharpierrc.json"
+  },
+  "dotnet": {
+    "tools.json": ".config/dotnet-tools.json"
+  },
+  "workspaces": {
+    "Directory.Build.props": "Directory.Build.props"
+  }
+}
