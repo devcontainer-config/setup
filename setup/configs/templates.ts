@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-export type TemplateKind = "base" | "typescript";
+export type TemplateKind = "base" | "typescript" | "csharp";
 
 export const loadTemplate = (kind: TemplateKind, filePath: string): Promise<string> => {
   const fullPath = path.resolve(import.meta.dirname, "../templates", kind, filePath);

@@ -8,11 +8,11 @@ import { createBaseWorkspaceConfigs } from "./workspace.js";
 export type BaseConfigs = BaseDevcontainerConfigs & BaseDotConfigs & BaseWorkspaceConfigs;
 
 export const createBaseConfigs = async (projectName: string, remoteUser = "dev"): Promise<BaseConfigs> => {
-  const devcontainerConfigs = await createBaseDevcontainerConfigs(projectName, remoteUser);
+  const devContainerConfigs = await createBaseDevcontainerConfigs(projectName, remoteUser);
   const dotConfigs = await createBaseDotConfigs(projectName, remoteUser);
   const workspaceConfigs = await createBaseWorkspaceConfigs();
   return {
-    ...devcontainerConfigs,
+    ...devContainerConfigs,
     ...dotConfigs,
     ...workspaceConfigs,
   };

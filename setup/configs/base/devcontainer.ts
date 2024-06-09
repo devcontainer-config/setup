@@ -1,10 +1,14 @@
+import type { CSpellUserSettings } from "cspell-lib";
+import { spellCheckDocument } from "cspell-lib";
+import * as jsonc from "jsonc-parser";
 import semver from "semver";
 
-import { fillTemplate } from "../../formatting.js";
+import { fillTemplate, stringify } from "../../formatting.js";
 import { getNodeLtsVersions } from "../../versions/node.js";
 import { getNpmPackageDistTags } from "../../versions/npm.js";
 import { getOciArtifactMaxMajorVersion, getOciArtifactTags } from "../../versions/oci.js";
 import { loadTemplates } from "../templates.js";
+import type { BaseDotConfigs } from "./dotConfig.js";
 
 export interface BaseDevcontainerConfigs {
   ".devcontainer/.env": string;
@@ -29,37 +33,64 @@ const getPnpmLatestDistTag = async () => {
 
 export const createBaseDevcontainerConfigs = async (
   projectName: string,
-  remoteUser = "dev",
+  remoteUser: string,
 ): Promise<BaseDevcontainerConfigs> => {
-  const userInitRepoName = "ghcr.io/devcontainer-config/features/user-init";
-  const dotConfigRepoName = "ghcr.io/devcontainer-config/features/dot-config";
-  const userInitVersion = await getOciArtifactMaxMajorVersion(userInitRepoName);
-  const dotConfigVersion = await getOciArtifactMaxMajorVersion(dotConfigRepoName);
-
-  const nodeDevcontainerRepoName = "mcr.microsoft.com/devcontainers/javascript-node";
-  const nodeLtsVersions = await getNodeLtsVersions();
-  const nodeDevcontainerTags = new Set(await getOciArtifactTags(nodeDevcontainerRepoName));
-  const nodeVersion = nodeLtsVersions.find((v) => nodeDevcontainerTags.has(v.toString()))?.toString() ?? "latest";
-
-  const templates = await loadTemplates("base", [
+  const templatePaths = [
     ".devcontainer/.env",
     ".devcontainer/devcontainer.json",
     ".devcontainer/docker-compose.yml",
     ".devcontainer/Dockerfile",
     ".devcontainer/dot-config.json",
-  ] satisfies (keyof BaseDevcontainerConfigs)[]);
+  ] satisfies (keyof BaseDevcontainerConfigs)[];
+  const templates = await loadTemplates("base", [
+    ...templatePaths,
+    ".config/cspell/cspell.json" satisfies keyof BaseDotConfigs,
+  ]);
 
-  const pnpmVersion = await getPnpmLatestDistTag();
+  const devContainerConfig = await (async () => {
+    const devContainerConfigPath = ".devcontainer/devcontainer.json" satisfies keyof BaseDevcontainerConfigs;
+    const devContainerConfig = jsonc.parse(
+      fillTemplate(templates[devContainerConfigPath], { projectName, remoteUser }),
+    ) as {
+      features: object;
+    };
+
+    const userInitRepoName = "ghcr.io/devcontainer-config/features/user-init";
+    const dotConfigRepoName = "ghcr.io/devcontainer-config/features/dot-config";
+    const userInitVersion = await getOciArtifactMaxMajorVersion(userInitRepoName);
+    const dotConfigVersion = await getOciArtifactMaxMajorVersion(dotConfigRepoName);
+    devContainerConfig.features = {
+      [`${userInitRepoName}:${userInitVersion}`]: {},
+      [`${dotConfigRepoName}:${dotConfigVersion}`]: {},
+    };
+
+    const content = stringify(devContainerConfig);
+    const spellCheckResult = await spellCheckDocument(
+      { uri: devContainerConfigPath, text: content },
+      { noConfigSearch: true },
+      jsonc.parse(templates[".config/cspell/cspell.json"]) as CSpellUserSettings,
+    );
+    return [
+      `// spell-checker:ignore ${[...new Set(spellCheckResult.issues.map((issue) => issue.text))].join(" ")}`,
+      content,
+    ].join("\n");
+  })();
+
+  const dockerFile = await (async () => {
+    const nodeDevcontainerRepoName = "mcr.microsoft.com/devcontainers/javascript-node";
+    const nodeLtsVersions = await getNodeLtsVersions();
+    const nodeDevcontainerTags = new Set(await getOciArtifactTags(nodeDevcontainerRepoName));
+    const nodeVersion = nodeLtsVersions.find((v) => nodeDevcontainerTags.has(v.toString()))?.toString() ?? "latest";
+    const pnpmVersion = await getPnpmLatestDistTag();
+
+    return fillTemplate(templates[".devcontainer/Dockerfile"], { nodeVersion, pnpmVersion });
+  })();
+
   return {
     ".devcontainer/.env": fillTemplate(templates[".devcontainer/.env"], { projectName, remoteUser }),
-    ".devcontainer/devcontainer.json": fillTemplate(templates[".devcontainer/devcontainer.json"], {
-      projectName,
-      remoteUser,
-    })
-      .replaceAll(userInitRepoName, `${userInitRepoName}:${userInitVersion}`)
-      .replaceAll(dotConfigRepoName, `${dotConfigRepoName}:${dotConfigVersion}`),
+    ".devcontainer/devcontainer.json": devContainerConfig,
     ".devcontainer/docker-compose.yml": templates[".devcontainer/docker-compose.yml"],
-    ".devcontainer/Dockerfile": fillTemplate(templates[".devcontainer/Dockerfile"], { nodeVersion, pnpmVersion }),
+    ".devcontainer/Dockerfile": dockerFile,
     ".devcontainer/dot-config.json": fillTemplate(templates[".devcontainer/dot-config.json"], { remoteUser }),
   };
 };

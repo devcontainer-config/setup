@@ -11,3 +11,5 @@ export const createComposer = (config: Config): typeof defaultComposer => {
 };
 
 export const mergeArrayComposer = createComposer({ mergeArrays: true });
+
+export const propertiesComposer = (...text: string[]) => text.flatMap((t) => t.trimEnd().split("\n")).join("\n") + "\n";

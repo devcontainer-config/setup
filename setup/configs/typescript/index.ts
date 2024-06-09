@@ -14,13 +14,13 @@ export type TypeScriptConfigs = TypeScriptDevcontainerConfigs &
   TypeScriptWorkspaceConfigs;
 
 export const createTypeScriptConfigs = async <T extends BaseConfigs>(baseConfig: T): Promise<T & TypeScriptConfigs> => {
-  const devcontainerConfigs = await createTypeScriptDevcontainerConfigs(baseConfig);
+  const devContainerConfigs = await createTypeScriptDevcontainerConfigs(baseConfig);
   const dotConfigs = await createTypeScriptDotConfigs();
   const scriptsConfigs = await createTypesScriptsScriptsConfigs();
   const workspaceConfigs = await createTypeScriptWorkspaceConfigs(baseConfig);
   return {
     ...baseConfig,
-    ...devcontainerConfigs,
+    ...devContainerConfigs,
     ...dotConfigs,
     ...scriptsConfigs,
     ...workspaceConfigs,

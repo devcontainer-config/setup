@@ -13,6 +13,7 @@
     "npmjs",
     "packagejson",
     "pacote",
+    "rcompare",
     "rsort",
     "syncpack"
   ]

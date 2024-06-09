@@ -14,25 +14,25 @@ export interface TypeScriptDevcontainerConfigs {
 export const createTypeScriptDevcontainerConfigs = async (
   baseConfig: BaseConfigs,
 ): Promise<TypeScriptDevcontainerConfigs> => {
-  const devcontainerConfigPath = ".devcontainer/devcontainer.json";
+  const devContainerConfigPath = ".devcontainer/devcontainer.json";
   const templates = await loadTemplates("typescript", [
-    devcontainerConfigPath,
+    devContainerConfigPath,
   ] satisfies (keyof TypeScriptDevcontainerConfigs)[]);
 
   const devContainerConfig = stringify(
     mergeArrayComposer(
-      jsonc.parse(baseConfig[devcontainerConfigPath]) as object,
-      jsonc.parse(templates[devcontainerConfigPath]) as object,
+      jsonc.parse(baseConfig[devContainerConfigPath]) as object,
+      jsonc.parse(templates[devContainerConfigPath]) as object,
     ),
   );
   const spellCheckResult = await spellCheckDocument(
-    { uri: devcontainerConfigPath, text: devContainerConfig },
+    { uri: devContainerConfigPath, text: devContainerConfig },
     { noConfigSearch: true },
     jsonc.parse(baseConfig[".config/cspell/cspell.json"]) as CSpellUserSettings,
   );
 
   return {
-    [devcontainerConfigPath]: [
+    [devContainerConfigPath]: [
       `// spell-checker:ignore ${[...new Set(spellCheckResult.issues.map((issue) => issue.text))].join(" ")}`,
       devContainerConfig,
     ].join("\n"),
