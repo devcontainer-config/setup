@@ -3,5 +3,17 @@
   "enableGlobDot": true,
   "useGitignore": true,
   "ignorePaths": ["**/node_modules/**", "LICENSE"],
-  "words": ["devcontainer", "devcontainers", "execa", "npmjs", "packagejson", "pacote", "rsort", "syncpack"]
+  "words": [
+    "csharpierrc",
+    "devcontainer",
+    "devcontainers",
+    "execa",
+    "globalconfig",
+    "msbuild",
+    "npmjs",
+    "packagejson",
+    "pacote",
+    "rsort",
+    "syncpack"
+  ]
 }

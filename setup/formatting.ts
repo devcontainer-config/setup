@@ -33,7 +33,7 @@ export const fillTemplate = (template: string, values: Record<string, string>): 
     if (template.includes(pattern)) {
       result = result.replaceAll(pattern, value);
     } else {
-      throw new Error(`Template does not contain pattern: ${pattern}`);
+      throw new Error(`Template does not contain pattern: ${pattern}.`);
     }
   }
   return result;

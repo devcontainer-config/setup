@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "cake": "dotnet run --project Automation --target",
+    "format": "pnpm run cake Format",
+    "lint": "pnpm run cake Lint",
+    "restore": "pnpm run cake Restore"
+  }
+}

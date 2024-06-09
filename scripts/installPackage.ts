@@ -10,7 +10,7 @@ import pkg from "@/setup/package.json";
 
 const XDG_DATA_HOME = process.env.XDG_DATA_HOME;
 if (!XDG_DATA_HOME) {
-  throw new Error("XDG_DATA_HOME is not set");
+  throw new Error("XDG_DATA_HOME is not set.");
 }
 
 await build();
