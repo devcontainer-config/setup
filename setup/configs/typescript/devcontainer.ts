@@ -7,17 +7,17 @@ import type { BaseConfigs } from "../base/index.js";
 import { mergeArrayComposer } from "../composer.js";
 import { loadTemplates } from "../templates.js";
 
-export interface TypeScriptDevcontainerConfigs {
+export interface TypeScriptDevContainerConfigs {
   ".devcontainer/devcontainer.json": string;
 }
 
-export const createTypeScriptDevcontainerConfigs = async (
+export const createTypeScriptDevContainerConfigs = async (
   baseConfig: BaseConfigs,
-): Promise<TypeScriptDevcontainerConfigs> => {
+): Promise<TypeScriptDevContainerConfigs> => {
   const devContainerConfigPath = ".devcontainer/devcontainer.json";
   const templates = await loadTemplates("typescript", [
     devContainerConfigPath,
-  ] satisfies (keyof TypeScriptDevcontainerConfigs)[]);
+  ] satisfies (keyof TypeScriptDevContainerConfigs)[]);
 
   const devContainerConfig = stringify(
     mergeArrayComposer(

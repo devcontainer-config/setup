@@ -10,7 +10,7 @@ import { getOciArtifactMaxMajorVersion, getOciArtifactTags } from "../../version
 import { loadTemplates } from "../templates.js";
 import type { BaseDotConfigs } from "./dotConfig.js";
 
-export interface BaseDevcontainerConfigs {
+export interface BaseDevContainerConfigs {
   ".devcontainer/.env": string;
   ".devcontainer/devcontainer.json": string;
   ".devcontainer/docker-compose.yml": string;
@@ -31,24 +31,24 @@ const getPnpmLatestDistTag = async () => {
   return latestVersion ? `latest-${latestVersion}` : "latest";
 };
 
-export const createBaseDevcontainerConfigs = async (
+export const createBaseDevContainerConfigs = async (
   projectName: string,
   remoteUser: string,
-): Promise<BaseDevcontainerConfigs> => {
+): Promise<BaseDevContainerConfigs> => {
   const templatePaths = [
     ".devcontainer/.env",
     ".devcontainer/devcontainer.json",
     ".devcontainer/docker-compose.yml",
     ".devcontainer/Dockerfile",
     ".devcontainer/dot-config.json",
-  ] satisfies (keyof BaseDevcontainerConfigs)[];
+  ] satisfies (keyof BaseDevContainerConfigs)[];
   const templates = await loadTemplates("base", [
     ...templatePaths,
     ".config/cspell/cspell.json" satisfies keyof BaseDotConfigs,
   ]);
 
   const devContainerConfig = await (async () => {
-    const devContainerConfigPath = ".devcontainer/devcontainer.json" satisfies keyof BaseDevcontainerConfigs;
+    const devContainerConfigPath = ".devcontainer/devcontainer.json" satisfies keyof BaseDevContainerConfigs;
     const devContainerConfig = jsonc.parse(
       fillTemplate(templates[devContainerConfigPath], { projectName, remoteUser }),
     ) as {
