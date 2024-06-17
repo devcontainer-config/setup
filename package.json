@@ -36,6 +36,7 @@
     "globals": "^15.3.0",
     "isomorphic-git": "^1.25.10",
     "prettier": "^3.2.5",
+    "prettier-plugin-ini": "^1.2.0",
     "prettier-plugin-packagejson": "^2.5.0",
     "semver": "^7.6.2",
     "syncpack": "^12.3.2",

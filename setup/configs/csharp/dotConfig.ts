@@ -3,7 +3,6 @@ import type { X2jOptions } from "fast-xml-parser";
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
 import * as jsonc from "jsonc-parser";
 
-import { stringify } from "../../formatting.js";
 import { getNugetPackageLatestVersion } from "../../versions/nuget.js";
 import type { BaseConfigs } from "../base/index.js";
 import { mergeArrayComposer } from "../composer.js";
@@ -56,12 +55,12 @@ export const createCSharpDotConfigs = async (baseConfig: BaseConfigs): Promise<C
     const csharpierVersion = await getNugetPackageLatestVersion("csharpier");
     const content = JSON.parse(templates[".config/dotnet/tools.json"]) as { tools: { csharpier: { version: string } } };
     content.tools.csharpier.version = csharpierVersion;
-    return stringify(content);
+    return JSON.stringify(content);
   })();
 
   return {
     ".config/csharpier/.csharpierrc.json": templates[".config/csharpier/.csharpierrc.json"],
-    ".config/cspell/cspell.json": stringify(
+    ".config/cspell/cspell.json": JSON.stringify(
       mergeArrayComposer(
         jsonc.parse(baseConfig[".config/cspell/cspell.json"]) as CSpellUserSettings,
         jsonc.parse(templates[".config/cspell/cspell.json"]) as CSpellUserSettings,
@@ -72,7 +71,7 @@ export const createCSharpDotConfigs = async (baseConfig: BaseConfigs): Promise<C
     ".config/dotnet/Packages.props": packageProps,
     ".config/dotnet/Project.props": templates[".config/dotnet/Project.props"],
     ".config/dotnet/tools.json": toolsJson,
-    ".config/prettier/.prettierrc.json": stringify(
+    ".config/prettier/.prettierrc.json": JSON.stringify(
       mergeArrayComposer(
         JSON.parse(baseConfig[".config/prettier/.prettierrc.json"]) as object,
         JSON.parse(templates[".config/prettier/.prettierrc.json"]) as object,

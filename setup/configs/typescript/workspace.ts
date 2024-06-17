@@ -2,7 +2,6 @@ import { defaultComposer } from "default-composer";
 import semver from "semver";
 import type { PackageJson } from "type-fest";
 
-import { stringify } from "../../formatting.js";
 import { getNodeLatestLtsVersion } from "../../versions/node.js";
 import { getNpmLatestDependencies, getNpmPackagePeerDependencies } from "../../versions/npm.js";
 import type { BaseConfigs } from "../base/index.js";
@@ -50,7 +49,7 @@ export const createTypeScriptWorkspaceConfigs = async (
     semver.coerce(dependencies["@commander-js/extra-typings"])!.version,
   );
   return {
-    "package.json": stringify(
+    "package.json": JSON.stringify(
       defaultComposer(packageJson, {
         scripts: {
           fix: "vite-node scripts/fix.ts",

@@ -2,7 +2,6 @@ import type { CSpellUserSettings } from "cspell-lib";
 import { spellCheckDocument } from "cspell-lib";
 import * as jsonc from "jsonc-parser";
 
-import { stringify } from "../../formatting.js";
 import type { BaseConfigs } from "../base/index.js";
 import { mergeArrayComposer } from "../composer.js";
 import { loadTemplates } from "../templates.js";
@@ -19,7 +18,7 @@ export const createTypeScriptDevContainerConfigs = async (
     devContainerConfigPath,
   ] satisfies (keyof TypeScriptDevContainerConfigs)[]);
 
-  const devContainerConfig = stringify(
+  const devContainerConfig = JSON.stringify(
     mergeArrayComposer(
       jsonc.parse(baseConfig[devContainerConfigPath]) as object,
       jsonc.parse(templates[devContainerConfigPath]) as object,
