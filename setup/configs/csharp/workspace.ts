@@ -2,7 +2,6 @@ import { defaultComposer } from "default-composer";
 import { type X2jOptions, XMLBuilder, XMLParser } from "fast-xml-parser";
 import type { PackageJson } from "type-fest";
 
-import { stringify } from "../../formatting.js";
 import { getNpmLatestDependencies } from "../../versions/npm.js";
 import { getNugetPackageLatestVersion } from "../../versions/nuget.js";
 import type { BaseConfigs } from "../base/index.js";
@@ -21,6 +20,12 @@ export const createCSharpWorkspaceConfigs = async (baseConfig: BaseConfigs): Pro
     "Workspace.proj",
   ] satisfies (keyof CSharpWorkspaceConfigs)[]);
 
+  const packageJson = JSON.stringify(
+    defaultComposer(JSON.parse(baseConfig["package.json"]) as object, JSON.parse(templates["package.json"]) as object, {
+      dependencies: await getNpmLatestDependencies(["@prettier/plugin-xml", "prettier-plugin-ini"]),
+    } satisfies PackageJson),
+  );
+
   const workspaceProj = await (async () => {
     const options = { preserveOrder: true, ignoreAttributes: false } satisfies X2jOptions;
     const content = new XMLParser(options).parse(templates["Workspace.proj"]) as [
@@ -35,15 +40,7 @@ export const createCSharpWorkspaceConfigs = async (baseConfig: BaseConfigs): Pro
   })();
   return {
     "Directory.Build.props": templates["Directory.Build.props"],
-    "package.json": stringify(
-      defaultComposer(
-        JSON.parse(baseConfig["package.json"]) as object,
-        JSON.parse(templates["package.json"]) as object,
-        {
-          dependencies: await getNpmLatestDependencies(["@prettier/plugin-xml"]),
-        } satisfies PackageJson,
-      ),
-    ),
+    "package.json": packageJson,
     "Workspace.proj": workspaceProj,
   };
 };

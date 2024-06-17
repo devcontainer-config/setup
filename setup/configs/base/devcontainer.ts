@@ -3,7 +3,7 @@ import { spellCheckDocument } from "cspell-lib";
 import * as jsonc from "jsonc-parser";
 import semver from "semver";
 
-import { fillTemplate, stringify } from "../../formatting.js";
+import { fillTemplate } from "../../formatting.js";
 import { getNodeLtsVersions } from "../../versions/node.js";
 import { getNpmPackageDistTags } from "../../versions/npm.js";
 import { getOciArtifactMaxMajorVersion, getOciArtifactTags } from "../../versions/oci.js";
@@ -64,7 +64,7 @@ export const createBaseDevContainerConfigs = async (
       [`${dotConfigRepoName}:${dotConfigVersion}`]: {},
     };
 
-    const content = stringify(devContainerConfig);
+    const content = JSON.stringify(devContainerConfig);
     const spellCheckResult = await spellCheckDocument(
       { uri: devContainerConfigPath, text: content },
       { noConfigSearch: true },

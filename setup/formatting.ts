@@ -4,17 +4,22 @@ import type { ConfigFile } from "./types.js";
 
 export const prettierConfig: prettier.Config = {
   printWidth: 120,
-  // plugins: [import.meta.resolve("prettier-plugin-packagejson"), import.meta.resolve("@prettier/plugin-xml")],
-  plugins: ["prettier-plugin-packagejson", "@prettier/plugin-xml"],
+  plugins: [
+    import.meta.resolve("prettier-plugin-packagejson"),
+    import.meta.resolve("@prettier/plugin-xml"),
+    import.meta.resolve("prettier-plugin-ini"),
+  ],
   xmlWhitespaceSensitivity: "ignore",
+  overrides: [
+    { files: "app.manifest", options: { parser: "xml" } },
+    { files: "*.globalconfig", options: { parser: "ini" } },
+  ],
 };
 
-export const stringify = (value: unknown): string => JSON.stringify(value, null, 2);
-
 export const prettierFormat = async (text: string, filepath: string): Promise<string> => {
-  const fileInfo = await prettier.getFileInfo(filepath, prettierConfig);
+  const fileInfo = await prettier.getFileInfo(filepath, { ...prettierConfig, resolveConfig: false });
   if (fileInfo.inferredParser) {
-    return await prettier.format(text, { ...prettierConfig, filepath });
+    return await prettier.format(text, { ...prettierConfig, filepath, parser: fileInfo.inferredParser });
   } else {
     return text;
   }

@@ -3,7 +3,7 @@ import { spellCheckDocument } from "cspell-lib";
 import { defaultComposer } from "default-composer";
 import * as jsonc from "jsonc-parser";
 
-import { fillTemplate, stringify } from "../../formatting.js";
+import { fillTemplate } from "../../formatting.js";
 import { getDotNetCoreLatestLtsRelease } from "../../versions/dotnet.js";
 import { getOciArtifactMaxMajorVersion } from "../../versions/oci.js";
 import type { BaseDevContainerConfigs } from "../base/devcontainer.js";
@@ -47,7 +47,7 @@ export const createCSharpDevContainerConfigs = async (
       devContainerConfig,
     );
 
-    const content = stringify(mergedDevContainerConfig);
+    const content = JSON.stringify(mergedDevContainerConfig);
     const spellCheckResult = await spellCheckDocument(
       { uri: ".devcontainer/devcontainer.json", text: content },
       { noConfigSearch: true },
@@ -68,7 +68,7 @@ export const createCSharpDevContainerConfigs = async (
       fillTemplate(templates[".devcontainer/.env"], { remoteUser }),
     ),
     ".devcontainer/devcontainer.json": devContainerConfig,
-    ".devcontainer/dot-config.json": stringify(
+    ".devcontainer/dot-config.json": JSON.stringify(
       defaultComposer(
         jsonc.parse(baseConfig[".devcontainer/dot-config.json"]) as object,
         jsonc.parse(templates[".devcontainer/dot-config.json"]) as object,

@@ -1,7 +1,6 @@
 import { defaultComposer } from "default-composer";
 import type { TsConfigJson } from "type-fest";
 
-import { stringify } from "../../formatting.js";
 import { getNodeLatestLtsVersion } from "../../versions/node.js";
 import { loadTemplates } from "../templates.js";
 
@@ -20,7 +19,7 @@ export const createTypeScriptDotConfigs = async (): Promise<TypeScriptDotConfigs
 
   const nodeVersion = await getNodeLatestLtsVersion();
   return {
-    ".config/typescript/tsconfig.node.json": stringify(
+    ".config/typescript/tsconfig.node.json": JSON.stringify(
       defaultComposer(JSON.parse(templates[".config/typescript/tsconfig.node.json"]) as TsConfigJson, {
         extends: `@tsconfig/node${nodeVersion}/tsconfig.json`,
       }),

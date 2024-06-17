@@ -1,12 +1,8 @@
 {
-  "plugins": ["@prettier/plugin-xml"],
+  "plugins": ["@prettier/plugin-xml", "prettier-plugin-ini"],
   "xmlWhitespaceSensitivity": "ignore",
   "overrides": [
-    {
-      "files": "app.manifest",
-      "options": {
-        "parser": "xml"
-      }
-    }
+    { "files": "app.manifest", "options": { "parser": "xml" } },
+    { "files": "*.globalconfig", "options": { "parser": "ini" } }
   ]
 }
