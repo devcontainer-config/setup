@@ -60,7 +60,7 @@ export const createTypeScriptWorkspaceConfigs = async (
         dependencies: {
           ...dependencies,
           ...commanderVersion,
-          eslint: "^8.57.0", // Wait until typescript-eslint updates peer dependencies to ESLint 9
+          typescript: "~5.6.3", // TypeScript 5.7 breaks json import for --module=node16, wait for https://github.com/microsoft/TypeScript/issues/60705
         },
         devDependencies: {
           ...devDependencies,
