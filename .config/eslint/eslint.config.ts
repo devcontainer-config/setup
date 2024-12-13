@@ -1,11 +1,11 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import eslint from "@eslint/js";
+import vitest from "@vitest/eslint-plugin";
 import prettier from "eslint-config-prettier";
 import { gitignore } from "eslint-flat-config-gitignore";
 import nodePlugin from "eslint-plugin-n";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
-import vitest from "eslint-plugin-vitest";
 import globals from "globals";
 import tsESLint from "typescript-eslint";
 
