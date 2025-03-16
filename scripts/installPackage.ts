@@ -6,7 +6,7 @@ import { $ } from "execa";
 
 import { packagePrefix, projectRoot } from "@/scripts/project.js";
 import { build } from "@/scripts/tasks/build.js";
-import pkg from "@/setup/package.json";
+import pkg from "@/setup/package.json" with { type: "json" };
 
 const XDG_DATA_HOME = process.env.XDG_DATA_HOME;
 if (!XDG_DATA_HOME) {
@@ -22,6 +22,15 @@ await rm(tempPath, { recursive: true, force: true });
 await mkdir(tempPath, { recursive: true });
 await cp(path.resolve(projectRoot, pkg.name, "dist"), tempPath, { recursive: true });
 await writeFile(path.resolve(tempPath, "pnpm-workspace.yaml"), "");
+await writeFile(
+  path.resolve(tempPath, ".npmrc"),
+  [
+    "lockfile=false",
+    "resolution-mode=time-based",
+    "shared-workspace-lockfile=false",
+    "inject-workspace-packages=true",
+  ].join("\n"),
+);
 
 // Install the package globally after pnpm deploy.
 process.env.NODE_ENV = "production";

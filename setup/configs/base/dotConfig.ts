@@ -25,8 +25,6 @@ export const createBaseDotConfigs = async (projectName: string, remoteUser: stri
     ".config/git/ignore": templates[".config/git/ignore"],
     ".config/pnpm/rc": fillTemplate(templates[".config/pnpm/rc"], { remoteUser }),
     ".config/prettier/.prettierrc.json": templates[".config/prettier/.prettierrc.json"],
-    ".config/workspaces/pnpm-workspace.yaml": fillTemplate(templates[".config/workspaces/pnpm-workspace.yaml"], {
-      projectName,
-    }),
+    ".config/workspaces/pnpm-workspace.yaml": templates[".config/workspaces/pnpm-workspace.yaml"],
   };
 };

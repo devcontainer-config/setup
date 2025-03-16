@@ -2,6 +2,5 @@
   "extends": "../typescript/tsconfig.node.json",
   "compilerOptions": {
     "noEmitOnError": true
-  },
-  "exclude": []
+  }
 }

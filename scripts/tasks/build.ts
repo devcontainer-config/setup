@@ -8,11 +8,11 @@ import * as prettier from "prettier";
 import semver from "semver";
 import type { PackageJson } from "type-fest";
 
-import prettierOptions from "@/.config/prettier/.prettierrc.json";
-import { license } from "@/package.json";
+import prettierOptions from "@/.config/prettier/.prettierrc.json" with { type: "json" };
+import project from "@/package.json" with { type: "json" };
 import { packagePrefix, projectRoot } from "@/scripts/project.js";
 import { $$ } from "@/scripts/shell.js";
-import pkg from "@/setup/package.json";
+import pkg from "@/setup/package.json" with { type: "json" };
 
 const dist = path.resolve(projectRoot, pkg.name, "dist");
 
@@ -32,7 +32,7 @@ const writePackageJson = async () => {
     name: `${packagePrefix}${pkg.name}`,
     version: semver.rsort(tags).at(0) ?? pkg.version,
     ...(url && { repository: { type: "git", url } }),
-    license,
+    license: project.license,
   } satisfies PackageJson);
   const filepath = path.resolve(dist, "package.json");
   const packageJson = await prettier.format(JSON.stringify(pkgJson), { ...prettierOptions, filepath });

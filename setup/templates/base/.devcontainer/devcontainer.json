@@ -1,7 +1,7 @@
 // spell-checker:ignore esbenp azuretools
 {
   "name": "${projectName}",
-  "dockerComposeFile": "docker-compose.yml",
+  "dockerComposeFile": "compose.yaml",
   "service": "devcontainer",
   "remoteUser": "${remoteUser}",
   "overrideCommand": true,

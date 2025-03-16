@@ -31,6 +31,8 @@ export const createTypeScriptWorkspaceConfigs = async (
     "eslint-flat-config-gitignore",
     "execa",
     "glob",
+    "globals",
+    "jiti",
     "syncpack",
     "typescript",
     "typescript-eslint",
@@ -41,7 +43,6 @@ export const createTypeScriptWorkspaceConfigs = async (
   const devDependencies = await getNpmLatestDependencies([
     "@types/eslint",
     "@types/eslint-config-prettier",
-    "@types/eslint__js",
     "@types/node",
   ]);
   const commanderVersion = await getNpmPackagePeerDependencies(
@@ -54,13 +55,10 @@ export const createTypeScriptWorkspaceConfigs = async (
         scripts: {
           fix: "vite-node scripts/fix.ts",
           lint: "vite-node scripts/lint.ts",
-          restore: "vite-node scripts/restore.ts",
-          watch: "vite-node scripts/watch.ts",
         },
         dependencies: {
           ...dependencies,
           ...commanderVersion,
-          typescript: "~5.6.3", // TypeScript 5.7 breaks json import for --module=node16, wait for https://github.com/microsoft/TypeScript/issues/60705
         },
         devDependencies: {
           ...devDependencies,

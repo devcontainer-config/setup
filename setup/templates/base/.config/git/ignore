@@ -4,5 +4,3 @@ _*
 !**/.devcontainer/**
 !.config/
 !**/.config/**
-
-node_modules/

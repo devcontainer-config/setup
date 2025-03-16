@@ -53,7 +53,9 @@ export const createCSharpDotConfigs = async (baseConfig: BaseConfigs): Promise<C
 
   const toolsJson = await (async () => {
     const csharpierVersion = await getNugetPackageLatestVersion("csharpier");
-    const content = JSON.parse(templates[".config/dotnet/tools.json"]) as { tools: { csharpier: { version: string } } };
+    const content = jsonc.parse(templates[".config/dotnet/tools.json"]) as {
+      tools: { csharpier: { version: string } };
+    };
     content.tools.csharpier.version = csharpierVersion;
     return JSON.stringify(content);
   })();
@@ -73,8 +75,8 @@ export const createCSharpDotConfigs = async (baseConfig: BaseConfigs): Promise<C
     ".config/dotnet/tools.json": toolsJson,
     ".config/prettier/.prettierrc.json": JSON.stringify(
       mergeArrayComposer(
-        JSON.parse(baseConfig[".config/prettier/.prettierrc.json"]) as object,
-        JSON.parse(templates[".config/prettier/.prettierrc.json"]) as object,
+        jsonc.parse(baseConfig[".config/prettier/.prettierrc.json"]) as object,
+        jsonc.parse(templates[".config/prettier/.prettierrc.json"]) as object,
       ),
     ),
     ".config/workspaces/Directory.Build.props": templates[".config/workspaces/Directory.Build.props"],
