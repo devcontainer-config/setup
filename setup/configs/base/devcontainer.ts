@@ -13,7 +13,7 @@ import type { BaseDotConfigs } from "./dotConfig.js";
 export interface BaseDevContainerConfigs {
   ".devcontainer/.env": string;
   ".devcontainer/devcontainer.json": string;
-  ".devcontainer/docker-compose.yml": string;
+  ".devcontainer/compose.yaml": string;
   ".devcontainer/Dockerfile": string;
   ".devcontainer/dot-config.json": string;
 }
@@ -24,7 +24,7 @@ const getPnpmLatestDistTag = async () => {
     .filter((tag) => tag.startsWith("latest-"))
     .map((tag) => tag.slice("latest-".length))
     .map((tag) => semver.coerce(tag)?.major)
-    .flatMap((major) => (major ? major : []))
+    .flatMap((major) => major ?? [])
     .toSorted((a, b) => b - a)
     .at(0)
     ?.toString();
@@ -38,7 +38,7 @@ export const createBaseDevContainerConfigs = async (
   const templatePaths = [
     ".devcontainer/.env",
     ".devcontainer/devcontainer.json",
-    ".devcontainer/docker-compose.yml",
+    ".devcontainer/compose.yaml",
     ".devcontainer/Dockerfile",
     ".devcontainer/dot-config.json",
   ] satisfies (keyof BaseDevContainerConfigs)[];
@@ -87,9 +87,9 @@ export const createBaseDevContainerConfigs = async (
   })();
 
   return {
-    ".devcontainer/.env": fillTemplate(templates[".devcontainer/.env"], { projectName, remoteUser }),
+    ".devcontainer/.env": fillTemplate(templates[".devcontainer/.env"], { remoteUser }),
     ".devcontainer/devcontainer.json": devContainerConfig,
-    ".devcontainer/docker-compose.yml": templates[".devcontainer/docker-compose.yml"],
+    ".devcontainer/compose.yaml": fillTemplate(templates[".devcontainer/compose.yaml"], { projectName }),
     ".devcontainer/Dockerfile": dockerFile,
     ".devcontainer/dot-config.json": fillTemplate(templates[".devcontainer/dot-config.json"], { remoteUser }),
   };

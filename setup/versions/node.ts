@@ -11,7 +11,7 @@ export const getNodeLtsVersions = async (): Promise<number[]> => {
       const ltsVersions = versions
         .filter((v) => v.lts)
         .map((v) => semver.coerce(v.version))
-        .flatMap((v) => (v?.major ? v.major : []));
+        .flatMap((v) => v?.major ?? []);
       result.value = [...new Set(ltsVersions)].toSorted((a, b) => b - a);
     }
     return result.value;

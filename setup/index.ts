@@ -30,7 +30,7 @@ program
     if (template === "base") {
       configFiles = await formatConfigs({ ...baseConfig });
     } else if (template === "typescript") {
-      const configs = await createTypeScriptConfigs(baseConfig);
+      const configs = await createTypeScriptConfigs(projectName, baseConfig);
       configFiles = await formatConfigs({ ...configs });
     } else if (template === "csharp") {
       const configs = await createCSharpConfigs(baseConfig);

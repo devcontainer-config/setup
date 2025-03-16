@@ -9,9 +9,7 @@ export interface TypesScriptsScriptsConfigs {
   "scripts/fix.ts": string;
   "scripts/lint.ts": string;
   "scripts/project.ts": string;
-  "scripts/restore.ts": string;
   "scripts/shell.ts": string;
-  "scripts/watch.ts": string;
 }
 
 export const createTypesScriptsScriptsConfigs = async (): Promise<TypesScriptsScriptsConfigs> =>
@@ -24,7 +22,5 @@ export const createTypesScriptsScriptsConfigs = async (): Promise<TypesScriptsSc
     "scripts/fix.ts",
     "scripts/lint.ts",
     "scripts/project.ts",
-    "scripts/restore.ts",
     "scripts/shell.ts",
-    "scripts/watch.ts",
   ] satisfies (keyof TypesScriptsScriptsConfigs)[]);

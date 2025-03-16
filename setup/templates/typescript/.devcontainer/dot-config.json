@@ -1,0 +1,5 @@
+{
+  "eslint": {
+    "eslint.config.ts": "eslint.config.ts"
+  }
+}

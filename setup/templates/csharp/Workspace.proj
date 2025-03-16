@@ -1,9 +1,6 @@
 <Project>
   <Sdk Name="Microsoft.Build.Traversal" Version="4.1.0" />
   <ItemGroup>
-    <ProjectReference
-      Include="$(MSBuildThisFileDirectory)**/*.csproj"
-      Exclude="$(MSBuildThisFileDirectory)**/node_modules/**"
-    />
+    <ProjectReference Include="$(MSBuildThisFileDirectory)**/*.csproj" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
   "version": "0.2",
   "enableGlobDot": true,
   "useGitignore": true,
-  "ignorePaths": ["**/node_modules/**", "LICENSE"],
+  "gitignoreRoot": ".",
+  "ignorePaths": ["LICENSE"],
   "words": ["devcontainer", "devcontainers", "packagejson"]
 }

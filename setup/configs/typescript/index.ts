@@ -13,9 +13,12 @@ export type TypeScriptConfigs = TypeScriptDevContainerConfigs &
   TypesScriptsScriptsConfigs &
   TypeScriptWorkspaceConfigs;
 
-export const createTypeScriptConfigs = async <T extends BaseConfigs>(baseConfig: T): Promise<T & TypeScriptConfigs> => {
+export const createTypeScriptConfigs = async <T extends BaseConfigs>(
+  projectName: string,
+  baseConfig: T,
+): Promise<T & TypeScriptConfigs> => {
   const devContainerConfigs = await createTypeScriptDevContainerConfigs(baseConfig);
-  const dotConfigs = await createTypeScriptDotConfigs();
+  const dotConfigs = await createTypeScriptDotConfigs(projectName, baseConfig);
   const scriptsConfigs = await createTypesScriptsScriptsConfigs();
   const workspaceConfigs = await createTypeScriptWorkspaceConfigs(baseConfig);
   return {

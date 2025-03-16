@@ -12,6 +12,9 @@
   "cspell": {
     "cspell.json": "cspell.json"
   },
+  "eslint": {
+    "eslint.config.ts": "eslint.config.ts"
+  },
   "csharpier": {
     ".csharpierrc.json": ".csharpierrc.json"
   },

@@ -23,6 +23,7 @@ export const getDotNetCoreLtsReleases = async () => {
   const { "releases-index": releaseIndex } = await getDotNetCoreReleaseIndex();
   return releaseIndex
     .filter((release) => release["release-type"] === "lts")
+    .filter((release) => release["support-phase"] === "active")
     .map((release) => ({
       version: semver.coerce(release["latest-release"]),
       release,
