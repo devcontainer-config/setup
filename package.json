@@ -9,6 +9,7 @@
     "lint": "pnpm node scripts/lint.ts",
     "node": "vite-node scripts/node.ts",
     "publish": "pnpm node scripts/publish.ts",
+    "push": "pnpm node scripts/push.ts",
     "restore": "pnpm node scripts/restore.ts",
     "test": "pnpm node scripts/test.ts",
     "update": "pnpm node scripts/update.ts"
