@@ -37,6 +37,7 @@ process.env.NODE_ENV = "production";
 const installPath = path.resolve(XDG_DATA_HOME, pkg.name);
 await rm(installPath, { recursive: true, force: true });
 const $$ = $({ stdio: "inherit", verbose: "full", cwd: tempPath });
+await $$`pnpm install`;
 await $$`pnpm deploy --filter=${packageName} --prod ${installPath}`;
 await $$`npm uninstall --global ${packageName}`;
 await $$`npm install --global ${installPath}`;

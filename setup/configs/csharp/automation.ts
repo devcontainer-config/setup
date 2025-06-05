@@ -41,7 +41,7 @@ export const createCSharpAutomationConfigs = async (): Promise<CSharpAutomationC
 
     const { "channel-version": dotnetVersion } = await getDotNetCoreLatestLtsRelease();
     content[0].Project[0].PropertyGroup[1].TargetFramework[0]["#text"] = `net${dotnetVersion}`;
-    return new XMLBuilder(options).build(content) as string;
+    return new XMLBuilder(options).build(content);
   })();
 
   templates["Automation/Automation.csproj"] = csproj;

@@ -3,8 +3,9 @@
   "enableGlobDot": true,
   "useGitignore": true,
   "gitignoreRoot": ".",
-  "ignorePaths": ["LICENSE"],
+  "ignorePaths": ["LICENSE", "local.env"],
   "words": [
+    "csharpierignore",
     "csharpierrc",
     "devcontainer",
     "devcontainers",

@@ -63,6 +63,9 @@ export const createTypeScriptWorkspaceConfigs = async (
         devDependencies: {
           ...devDependencies,
         },
+        engines: {
+          node: `>=${nodeVersion}`,
+        },
       }),
     ),
     "tsconfig.json": templates["tsconfig.json"],

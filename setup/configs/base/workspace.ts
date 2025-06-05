@@ -7,7 +7,12 @@ export interface BaseWorkspaceConfigs {
 }
 
 export const createBaseWorkspaceConfigs = async (): Promise<BaseWorkspaceConfigs> => {
-  const dependencies = await getNpmLatestDependencies(["cspell", "prettier", "prettier-plugin-packagejson"]);
+  const dependencies = await getNpmLatestDependencies([
+    "cspell",
+    "prettier",
+    "prettier-plugin-packagejson",
+    "prettier-plugin-sh",
+  ]);
   return {
     "package.json": JSON.stringify({
       private: true,
