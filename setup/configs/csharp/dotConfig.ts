@@ -9,6 +9,7 @@ import { mergeArrayComposer } from "../composer.js";
 import { loadTemplates } from "../templates.js";
 
 export interface CSharpDotConfigs {
+  ".config/csharpier/.csharpierignore": string;
   ".config/csharpier/.csharpierrc.json": string;
   ".config/cspell/cspell.json": string;
   ".config/dotnet/.globalconfig": string;
@@ -22,6 +23,7 @@ export interface CSharpDotConfigs {
 
 export const createCSharpDotConfigs = async (baseConfig: BaseConfigs): Promise<CSharpDotConfigs> => {
   const templates = await loadTemplates("csharp", [
+    ".config/csharpier/.csharpierignore",
     ".config/csharpier/.csharpierrc.json",
     ".config/cspell/cspell.json",
     ".config/dotnet/.globalconfig",
@@ -48,7 +50,7 @@ export const createCSharpDotConfigs = async (baseConfig: BaseConfigs): Promise<C
       throw new Error("Cake.Frosting package not found in .config/dotnet/Packages.props");
     }
     cakeFrostingPackage[":@"]["@_Version"] = cakeFrostingVersion;
-    return new XMLBuilder(options).build(content) as string;
+    return new XMLBuilder(options).build(content);
   })();
 
   const toolsJson = await (async () => {
@@ -61,6 +63,7 @@ export const createCSharpDotConfigs = async (baseConfig: BaseConfigs): Promise<C
   })();
 
   return {
+    ".config/csharpier/.csharpierignore": templates[".config/csharpier/.csharpierignore"],
     ".config/csharpier/.csharpierrc.json": templates[".config/csharpier/.csharpierrc.json"],
     ".config/cspell/cspell.json": JSON.stringify(
       mergeArrayComposer(

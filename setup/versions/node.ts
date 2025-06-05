@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import semver from "semver";
 
 export const getNodeLtsVersions = async (): Promise<number[]> => {

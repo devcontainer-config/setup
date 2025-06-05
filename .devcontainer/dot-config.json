@@ -16,7 +16,8 @@
     "eslint.config.ts": "eslint.config.ts"
   },
   "csharpier": {
-    ".csharpierrc.json": ".csharpierrc.json"
+    ".csharpierrc.json": ".csharpierrc.json",
+    ".csharpierignore": ".csharpierignore"
   },
   "dotnet": {
     "tools.json": ".config/dotnet-tools.json"

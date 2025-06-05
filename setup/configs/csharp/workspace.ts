@@ -36,7 +36,7 @@ export const createCSharpWorkspaceConfigs = async (baseConfig: BaseConfigs): Pro
 
     const msbuildTraversalVersion = await getNugetPackageLatestVersion(content[0].Project[0][":@"]["@_Name"]);
     content[0].Project[0][":@"]["@_Version"] = msbuildTraversalVersion;
-    return new XMLBuilder(options).build(content) as string;
+    return new XMLBuilder(options).build(content);
   })();
   return {
     "Directory.Build.props": templates["Directory.Build.props"],

@@ -5,6 +5,7 @@
   "gitignoreRoot": ".",
   "ignorePaths": ["LICENSE"],
   "words": [
+    "csharpierignore",
     "csharpierrc",
     "devcontainer",
     "devcontainers",
