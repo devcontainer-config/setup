@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@commander-js/extra-typings": "^14.0.0",
+    "@devcontainers/cli": "^0.80.1",
     "@eslint/js": "^9.39.1",
     "@prettier/plugin-xml": "^3.4.2",
     "@tsconfig/node24": "^24.0.1",
