@@ -7,3 +7,5 @@ export const workspaces = path.resolve(projectRoot, "..");
 export const csProjectRoot = path.resolve(projectRoot, "setup/templates/csharp");
 
 export const packagePrefix = "@devcontainer-config/";
+
+export const packageOutputPath = path.resolve(projectRoot, `.local/dist`);

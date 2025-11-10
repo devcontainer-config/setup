@@ -14,6 +14,5 @@
         "typescript.tsdk": "/workspaces/node_modules/typescript/lib"
       }
     }
-  },
-  "onCreateCommand": "pnpm install"
+  }
 }

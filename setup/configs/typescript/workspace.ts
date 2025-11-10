@@ -27,6 +27,7 @@ export const createTypeScriptWorkspaceConfigs = async (
     "@commander-js/extra-typings",
     "@eslint/js",
     `@tsconfig/node${nodeVersion}`,
+    "eslint",
     "eslint-config-prettier",
     "eslint-flat-config-gitignore",
     "execa",

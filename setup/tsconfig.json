@@ -3,7 +3,7 @@
   "compilerOptions": {
     "typeRoots": ["node_modules/@types"],
     "declaration": true,
-    "outDir": "dist/"
+    "outDir": "../.local/dist/"
   },
-  "exclude": ["templates", "dist"]
+  "exclude": ["templates"]
 }

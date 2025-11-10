@@ -7,5 +7,3 @@ _*
 local.env
 
 node_modules/
-
-dist/

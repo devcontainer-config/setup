@@ -1,4 +1,3 @@
-// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import fs, { copyFile, cp } from "node:fs/promises";
 import { readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -10,11 +9,11 @@ import type { PackageJson } from "type-fest";
 
 import prettierOptions from "@/.config/prettier/.prettierrc.json" with { type: "json" };
 import project from "@/package.json" with { type: "json" };
-import { packagePrefix, projectRoot } from "@/scripts/project.js";
+import { packageOutputPath, packagePrefix, projectRoot } from "@/scripts/project.js";
 import { $$ } from "@/scripts/shell.js";
 import pkg from "@/setup/package.json" with { type: "json" };
 
-const dist = path.resolve(projectRoot, pkg.name, "dist");
+const dist = packageOutputPath;
 
 const insertShebang = async (path: string) => {
   const content = await readFile(path, "utf-8");

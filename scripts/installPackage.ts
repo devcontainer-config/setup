@@ -1,10 +1,9 @@
-// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { $ } from "execa";
 
-import { packagePrefix, projectRoot } from "@/scripts/project.js";
+import { packageOutputPath, packagePrefix } from "@/scripts/project.js";
 import { build } from "@/scripts/tasks/build.js";
 import pkg from "@/setup/package.json" with { type: "json" };
 
@@ -20,7 +19,7 @@ const packageName = `${packagePrefix}${pkg.name}`;
 const tempPath = `/tmp/${packageName}`;
 await rm(tempPath, { recursive: true, force: true });
 await mkdir(tempPath, { recursive: true });
-await cp(path.resolve(projectRoot, pkg.name, "dist"), tempPath, { recursive: true });
+await cp(packageOutputPath, tempPath, { recursive: true });
 await writeFile(path.resolve(tempPath, "pnpm-workspace.yaml"), "");
 await writeFile(
   path.resolve(tempPath, ".npmrc"),
