@@ -1,5 +1,7 @@
 import path from "node:path";
 
+export const projectName = "devcontainer-config-setup";
+
 export const projectRoot = path.resolve(import.meta.dirname, "..");
 
 export const workspaces = path.resolve(projectRoot, "..");

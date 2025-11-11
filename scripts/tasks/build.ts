@@ -24,12 +24,17 @@ const clean = () => rm(dist, { recursive: true, force: true });
 
 const compile = () => $$`tsc --project ${path.resolve(projectRoot, pkg.name, "tsconfig.json")}`;
 
-const writePackageJson = async () => {
+export const getVersionTag = async () => {
   const tags = await git.listTags({ fs, dir: projectRoot });
+  return semver.rsort(tags).at(0) ?? pkg.version;
+};
+
+const writePackageJson = async () => {
+  const version = await getVersionTag();
   const url = (await git.listRemotes({ fs, dir: projectRoot })).at(0)?.url;
   const pkgJson: PackageJson = Object.assign({}, pkg as PackageJson, {
     name: `${packagePrefix}${pkg.name}`,
-    version: semver.rsort(tags).at(0) ?? pkg.version,
+    version,
     ...(url && { repository: { type: "git", url } }),
     license: project.license,
   } satisfies PackageJson);

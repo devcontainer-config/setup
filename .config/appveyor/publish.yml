@@ -6,6 +6,9 @@ skip_non_tags: true
 image: Ubuntu2004
 environment:
   NPM_TOKEN: NPM_TOKEN
+  REGISTRY: ghcr.io
+  IMAGE_NAME: devcontainer-config/setup
+  REGISTRY_TOKEN: REGISTRY_TOKEN
 build_script:
   - sh: >-
       set -e
@@ -22,3 +25,9 @@ deploy_script:
       devcontainer exec --workspace-folder . pnpm build
 
       devcontainer exec --workspace-folder . --remote-env NPM_TOKEN=${NPM_TOKEN} pnpm run publish
+
+      devcontainer exec --workspace-folder . \
+        --remote-env REGISTRY=${REGISTRY} \
+        --remote-env IMAGE_NAME=${IMAGE_NAME} \
+        --remote-env REGISTRY_TOKEN=${REGISTRY_TOKEN} \
+        pnpm run buildx
