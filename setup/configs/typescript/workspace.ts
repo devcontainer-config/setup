@@ -1,9 +1,8 @@
 import { defaultComposer } from "default-composer";
-import semver from "semver";
 import type { PackageJson } from "type-fest";
 
 import { getNodeLatestLtsVersion } from "../../versions/node.js";
-import { getNpmLatestDependencies, getNpmPackagePeerDependencies } from "../../versions/npm.js";
+import { getNpmLatestDependencies } from "../../versions/npm.js";
 import type { BaseConfigs } from "../base/index.js";
 import { loadTemplates } from "../templates.js";
 
@@ -24,9 +23,9 @@ export const createTypeScriptWorkspaceConfigs = async (
   const packageJson = JSON.parse(baseConfig["package.json"]) as PackageJson;
   const nodeVersion = await getNodeLatestLtsVersion();
   const dependencies = await getNpmLatestDependencies([
-    "@commander-js/extra-typings",
     "@eslint/js",
     `@tsconfig/node${nodeVersion}`,
+    "eslint",
     "eslint-config-prettier",
     "eslint-flat-config-gitignore",
     "execa",
@@ -45,10 +44,6 @@ export const createTypeScriptWorkspaceConfigs = async (
     "@types/eslint-config-prettier",
     "@types/node",
   ]);
-  const commanderVersion = await getNpmPackagePeerDependencies(
-    "@commander-js/extra-typings",
-    semver.coerce(dependencies["@commander-js/extra-typings"])!.version,
-  );
   return {
     "package.json": JSON.stringify(
       defaultComposer(packageJson, {
@@ -56,10 +51,7 @@ export const createTypeScriptWorkspaceConfigs = async (
           fix: "vite-node scripts/fix.ts",
           lint: "vite-node scripts/lint.ts",
         },
-        dependencies: {
-          ...dependencies,
-          ...commanderVersion,
-        },
+        dependencies: dependencies,
         devDependencies: {
           ...devDependencies,
         },

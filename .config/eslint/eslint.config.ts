@@ -1,5 +1,6 @@
 import eslint from "@eslint/js";
 import vitest from "@vitest/eslint-plugin";
+import { defineConfig } from "eslint/config";
 import prettier from "eslint-config-prettier";
 import { gitignore } from "eslint-flat-config-gitignore";
 import importPlugin from "eslint-plugin-import";
@@ -9,7 +10,7 @@ import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import globals from "globals";
 import tsESLint from "typescript-eslint";
 
-export default tsESLint.config(
+export default defineConfig(
   await gitignore(import.meta.dirname),
   {
     linterOptions: { reportUnusedDisableDirectives: true },
