@@ -16,7 +16,7 @@
     "@commander-js/extra-typings": "^14.0.0",
     "@prettier/plugin-xml": "^3.4.2",
     "commander": "~14.0.2",
-    "cspell-lib": "^9.3.0",
+    "cspell-lib": "^9.3.1",
     "dedent": "^1.7.0",
     "default-composer": "^0.6.0",
     "fast-xml-parser": "^5.3.1",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "@types/pacote": "^11.1.8",
     "@types/semver": "^7.7.1",
     "@types/write-file-atomic": "^4.0.3"

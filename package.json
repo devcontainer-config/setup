@@ -22,10 +22,10 @@
     "@tsconfig/node24": "^24.0.1",
     "@vitest/eslint-plugin": "^1.4.2",
     "commander": "~14.0.2",
-    "cspell": "^9.3.0",
+    "cspell": "^9.3.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-flat-config-gitignore": "^3.0.0",
+    "eslint-flat-config-gitignore": "^3.0.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-n": "^17.23.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -43,7 +43,7 @@
     "syncpack": "^13.0.4",
     "type-fest": "^5.2.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.3",
+    "typescript-eslint": "^8.46.4",
     "vite": "^7.2.2",
     "vite-node": "^5.0.0",
     "vite-tsconfig-paths": "^5.1.4",
@@ -52,7 +52,7 @@
   "devDependencies": {
     "@types/eslint": "^9.6.1",
     "@types/eslint-config-prettier": "^6.11.3",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "@types/semver": "^7.7.1"
   },
   "engines": {
