@@ -14,6 +14,7 @@ import { loadTemplates } from "../templates.js";
 export interface CSharpDevContainerConfigs {
   ".devcontainer/.env": string;
   ".devcontainer/devcontainer.json": string;
+  ".devcontainer/Dockerfile": string;
   ".devcontainer/dot-config.json": string;
 }
 
@@ -62,12 +63,19 @@ export const createCSharpDevContainerConfigs = async (
     ].join("\n");
   })();
 
+  const dockerFilaPath = ".devcontainer/Dockerfile" satisfies keyof BaseConfigs;
+  const dockerFileConfig = [
+    baseConfig[dockerFilaPath],
+    "RUN mkdir /usr/share/dotnet && chmod a+w /usr/share/dotnet",
+  ].join("\n");
+
   return {
     ".devcontainer/.env": propertiesComposer(
       baseConfig[".devcontainer/.env"],
       fillTemplate(templates[".devcontainer/.env"], { remoteUser }),
     ),
     ".devcontainer/devcontainer.json": devContainerConfig,
+    ".devcontainer/Dockerfile": dockerFileConfig,
     ".devcontainer/dot-config.json": JSON.stringify(
       defaultComposer(
         jsonc.parse(baseConfig[".devcontainer/dot-config.json"]) as object,

@@ -8,6 +8,7 @@ export const prettierConfig: prettier.Config = {
     import.meta.resolve("prettier-plugin-packagejson"),
     import.meta.resolve("@prettier/plugin-xml"),
     import.meta.resolve("prettier-plugin-ini"),
+    import.meta.resolve("prettier-plugin-sh"),
   ],
   xmlWhitespaceSensitivity: "ignore",
   overrides: [
