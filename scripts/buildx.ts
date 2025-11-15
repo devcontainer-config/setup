@@ -2,14 +2,14 @@ import path from "node:path";
 
 import { $ } from "execa";
 
-import { projectRoot } from "@/scripts/project.js";
+import { projectRoot, workspaces } from "@/scripts/project.js";
 import { $$ } from "@/scripts/shell.js";
 import { getVersionTag } from "@/scripts/tasks/build.js";
 import { deploy } from "@/scripts/tasks/deploy.js";
 
 const platforms: string[] = ["linux/amd64", "linux/arm64"];
 
-const packagePath = path.resolve(projectRoot, ".local/docker");
+const packagePath = path.resolve(workspaces, "artifacts/package");
 
 async function buildImage(registry: string, imageName: string, tags: string[], publish: boolean) {
   console.log("Building multi-arch Docker image...");
