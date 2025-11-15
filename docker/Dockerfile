@@ -5,6 +5,6 @@ ARG TARGETOS
 ARG TARGETARCH
 FROM ${TARGETOS}-${TARGETARCH}-base
 
-COPY .local/docker /etc/devcontainer-config-setup
+COPY package/ /etc/devcontainer-config-setup
 
 ENTRYPOINT [ "/nodejs/bin/node", "/etc/devcontainer-config-setup/index.js" ]

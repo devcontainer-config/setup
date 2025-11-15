@@ -9,7 +9,8 @@ import { deploy } from "@/scripts/tasks/deploy.js";
 
 const platforms: string[] = ["linux/amd64", "linux/arm64"];
 
-const packagePath = path.resolve(workspaces, "artifacts/package");
+const artifactsPath = path.resolve(workspaces, "artifacts");
+const packagePath = path.resolve(artifactsPath, "package");
 
 async function buildImage(registry: string, imageName: string, tags: string[], publish: boolean) {
   console.log("Building multi-arch Docker image...");
@@ -27,9 +28,7 @@ async function buildImage(registry: string, imageName: string, tags: string[], p
     args.push("--push");
   }
 
-  args.push(projectRoot);
-
-  await $$`docker ${args}`;
+  await $$`docker ${args} ${artifactsPath}`;
   console.log("Docker image built successfully.");
 }
 
