@@ -1,6 +1,6 @@
 packages:
-  - "devcontainer-config-setup/*"
-  - "devcontainer-config-setup/setup/templates/*"
+  - "setup/*"
+  - "setup/setup/templates/*"
 overrides:
   "@eslint/js": "^9.39.2"
   "eslint": "^9.39.1"

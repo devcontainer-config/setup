@@ -3,7 +3,7 @@
   "enableGlobDot": true,
   "useGitignore": true,
   "gitignoreRoot": ".",
-  "ignorePaths": ["LICENSE", "local.env"],
+  "ignorePaths": ["LICENSE"],
   "words": [
     "buildx",
     "csharpierignore",

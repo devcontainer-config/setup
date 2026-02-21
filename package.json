@@ -6,7 +6,7 @@
     "build": "pnpm vite-node scripts/build.ts",
     "buildx": "pnpm vite-node scripts/buildx.ts",
     "fix": "pnpm vite-node scripts/fix.ts",
-    "installPackage": "pnpm vite-node scripts/installPackage.ts",
+    "install-package": "pnpm vite-node scripts/installPackage.ts",
     "lint": "pnpm vite-node scripts/lint.ts",
     "publish": "pnpm vite-node scripts/publish.ts",
     "push": "pnpm vite-node scripts/push.ts",
