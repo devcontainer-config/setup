@@ -15,7 +15,7 @@ export const deploy = async (packagePath: string) => {
   const tempPath = `/tmp/${packageName}`;
   await rm(tempPath, { recursive: true, force: true });
   await mkdir(tempPath, { recursive: true });
-  await cp(packageOutputPath, tempPath, { recursive: true });
+  await cp(path.resolve(packageOutputPath, pkg.name), tempPath, { recursive: true });
   await writeFile(path.resolve(tempPath, "pnpm-workspace.yaml"), "");
   await writeFile(
     path.resolve(tempPath, ".npmrc"),

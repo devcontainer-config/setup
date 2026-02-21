@@ -10,4 +10,4 @@ export const csProjectRoot = path.resolve(projectRoot, "setup/templates/csharp")
 
 export const packagePrefix = "@devcontainer-config/";
 
-export const packageOutputPath = path.resolve(projectRoot, `.local/dist`);
+export const packageOutputPath = path.resolve(workspaces, `artifacts/node`);

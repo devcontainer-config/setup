@@ -1,4 +1,4 @@
-import fs, { copyFile, cp } from "node:fs/promises";
+import fs, { copyFile, cp, mkdir } from "node:fs/promises";
 import { readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -13,16 +13,24 @@ import { packageOutputPath, packagePrefix, projectRoot } from "@/scripts/project
 import { $$ } from "@/scripts/shell.js";
 import pkg from "@/setup/package.json" with { type: "json" };
 
-const dist = packageOutputPath;
+const dist = path.resolve(packageOutputPath, pkg.name);
 
 const insertShebang = async (path: string) => {
   const content = await readFile(path, "utf-8");
   await writeFile(path, `#!/usr/bin/env node\n${content}`);
 };
 
-const clean = () => rm(dist, { recursive: true, force: true });
+const reset = async (path: string) => {
+  await rm(path, { recursive: true, force: true });
+  await mkdir(path, { recursive: true });
+};
 
-const compile = () => $$`tsc --project ${path.resolve(projectRoot, pkg.name, "tsconfig.json")}`;
+const compile = () =>
+  $$`tsc ${[
+    ...["--project", path.resolve(projectRoot, pkg.name, "tsconfig.json")],
+    ...["--noEmit", "false"],
+    ...["--outDir", dist],
+  ]}`;
 
 export const getVersionTag = async () => {
   const tags = await git.listTags({ fs, dir: projectRoot });
@@ -44,7 +52,7 @@ const writePackageJson = async () => {
 };
 
 export const build = async () => {
-  await clean();
+  await reset(dist);
   await compile();
   await insertShebang(path.resolve(dist, "index.js"));
   await writePackageJson();

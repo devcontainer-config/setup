@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+    <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts/dotnet</ArtifactsPath>
   </PropertyGroup>
 
   <ItemGroup>

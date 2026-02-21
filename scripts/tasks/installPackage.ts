@@ -2,7 +2,6 @@ import path from "node:path";
 
 import { packagePrefix } from "@/scripts/project.js";
 import { $$ } from "@/scripts/shell.js";
-import { build } from "@/scripts/tasks/build.js";
 import { deploy } from "@/scripts/tasks/deploy.js";
 import pkg from "@/setup/package.json" with { type: "json" };
 
@@ -11,8 +10,6 @@ export const installPackage = async () => {
   if (!XDG_DATA_HOME) {
     throw new Error("XDG_DATA_HOME is not set.");
   }
-
-  await build();
 
   // Copy the dist folder to a temporary location
   const packageName = `${packagePrefix}${pkg.name}`;

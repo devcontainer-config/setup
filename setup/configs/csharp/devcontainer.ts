@@ -13,6 +13,7 @@ import { loadTemplates } from "../templates.js";
 export interface CSharpDevContainerConfigs {
   ".devcontainer/container.env": string;
   ".devcontainer/devcontainer.json": string;
+  ".devcontainer/compose.yaml": string;
   ".devcontainer/Dockerfile": string;
   ".devcontainer/dot-config.json": string;
 }
@@ -21,6 +22,7 @@ export const createCSharpDevContainerConfigs = async (baseConfig: BaseConfigs): 
   const templatePaths = [
     ".devcontainer/container.env",
     ".devcontainer/devcontainer.json",
+    ".devcontainer/compose.yaml",
     ".devcontainer/dot-config.json",
   ] satisfies (keyof CSharpDevContainerConfigs)[];
   const templates = await loadTemplates("csharp", [
@@ -68,6 +70,7 @@ export const createCSharpDevContainerConfigs = async (baseConfig: BaseConfigs): 
   return {
     ".devcontainer/container.env": templates[".devcontainer/container.env"],
     ".devcontainer/devcontainer.json": devContainerConfig,
+    ".devcontainer/compose.yaml": templates[".devcontainer/compose.yaml"],
     ".devcontainer/Dockerfile": dockerFileConfig,
     ".devcontainer/dot-config.json": JSON.stringify(
       defaultComposer(
