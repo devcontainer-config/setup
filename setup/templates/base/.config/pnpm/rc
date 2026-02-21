@@ -1,4 +1,3 @@
 lockfile=false
 resolution-mode=time-based
-store-dir=/home/${remoteUser}/.local/share/pnpm/store
 global-bin-dir=/home/${remoteUser}/.local/bin

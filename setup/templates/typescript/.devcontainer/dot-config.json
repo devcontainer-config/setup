@@ -1,5 +1,5 @@
 {
   "eslint": {
-    "eslint.config.ts": "eslint.config.ts"
+    "config.ts": "eslint.config.ts"
   }
 }

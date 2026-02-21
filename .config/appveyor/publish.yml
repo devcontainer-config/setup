@@ -24,8 +24,6 @@ deploy_script:
 
       devcontainer exec --workspace-folder . pnpm build
 
-      devcontainer exec --workspace-folder . --remote-env NPM_TOKEN=${NPM_TOKEN} pnpm run publish
-
       devcontainer exec --workspace-folder . \
         --remote-env REGISTRY=${REGISTRY} \
         --remote-env IMAGE_NAME=${IMAGE_NAME} \

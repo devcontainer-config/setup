@@ -1,10 +1,10 @@
 {
   "git": {
-    "attributes": "/home/dev/.config/git/attributes",
-    "ignore": "/home/dev/.config/git/ignore"
+    "attributes": "/etc/devcontainer-config/git/attributes",
+    "ignore": "/etc/devcontainer-config/git/ignore"
   },
   "pnpm": {
-    "rc": "/home/dev/.config/pnpm/rc"
+    "rc": "/etc/devcontainer-config/pnpm/rc"
   },
   "prettier": {
     ".prettierrc.json": ".prettierrc.json"
@@ -13,7 +13,7 @@
     "cspell.json": "cspell.json"
   },
   "eslint": {
-    "eslint.config.ts": "eslint.config.ts"
+    "config.ts": "eslint.config.ts"
   },
   "csharpier": {
     ".csharpierrc.json": ".csharpierrc.json",

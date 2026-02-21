@@ -3,27 +3,23 @@ import { spellCheckDocument } from "cspell-lib";
 import { defaultComposer } from "default-composer";
 import * as jsonc from "jsonc-parser";
 
-import { fillTemplate } from "../../formatting.js";
 import { getDotNetCoreLatestLtsRelease } from "../../versions/dotnet.js";
 import { getOciArtifactMaxMajorVersion } from "../../versions/oci.js";
 import type { BaseDevContainerConfigs } from "../base/devcontainer.js";
 import type { BaseConfigs } from "../base/index.js";
-import { mergeArrayComposer, propertiesComposer } from "../composer.js";
+import { mergeArrayComposer } from "../composer.js";
 import { loadTemplates } from "../templates.js";
 
 export interface CSharpDevContainerConfigs {
-  ".devcontainer/.env": string;
+  ".devcontainer/container.env": string;
   ".devcontainer/devcontainer.json": string;
   ".devcontainer/Dockerfile": string;
   ".devcontainer/dot-config.json": string;
 }
 
-export const createCSharpDevContainerConfigs = async (
-  baseConfig: BaseConfigs,
-  remoteUser: string,
-): Promise<CSharpDevContainerConfigs> => {
+export const createCSharpDevContainerConfigs = async (baseConfig: BaseConfigs): Promise<CSharpDevContainerConfigs> => {
   const templatePaths = [
-    ".devcontainer/.env",
+    ".devcontainer/container.env",
     ".devcontainer/devcontainer.json",
     ".devcontainer/dot-config.json",
   ] satisfies (keyof CSharpDevContainerConfigs)[];
@@ -70,10 +66,7 @@ export const createCSharpDevContainerConfigs = async (
   ].join("\n");
 
   return {
-    ".devcontainer/.env": propertiesComposer(
-      baseConfig[".devcontainer/.env"],
-      fillTemplate(templates[".devcontainer/.env"], { remoteUser }),
-    ),
+    ".devcontainer/container.env": templates[".devcontainer/container.env"],
     ".devcontainer/devcontainer.json": devContainerConfig,
     ".devcontainer/Dockerfile": dockerFileConfig,
     ".devcontainer/dot-config.json": JSON.stringify(

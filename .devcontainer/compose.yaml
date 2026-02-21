@@ -1,23 +1,12 @@
 services:
   devcontainer:
     env_file:
-      - .env
+      - container.env
       - path: ../.local/.env
         required: false
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      NUGET_PACKAGES: /usr/share/devcontainer-config/NuGet/global-packages
     init: true
-    volumes:
-      - WORKSPACES:${WORKSPACES}
-      - ..:${WORKSPACES}/devcontainer-config-setup
-      - XDG_CONFIG_HOME:${XDG_CONFIG_HOME}
-      - XDG_CACHE_HOME:${XDG_CACHE_HOME}
-      - XDG_DATA_HOME:${XDG_DATA_HOME}
-      - XDG_STATE_HOME:${XDG_STATE_HOME}
-volumes:
-  WORKSPACES:
-  XDG_CONFIG_HOME:
-  XDG_CACHE_HOME:
-  XDG_DATA_HOME:
-  XDG_STATE_HOME:

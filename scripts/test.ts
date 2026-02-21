@@ -17,21 +17,34 @@ const reset = async (path: string) => {
   await mkdir(path, { recursive: true });
 };
 
-await reset(tempPath);
-await $$`create-devcontainer csharp`;
-await $$`devcontainer up --remove-existing-container --workspace-folder ${tempPath}`;
-await $$`devcontainer exec --workspace-folder ${tempPath} pnpm lint`;
+const cleanup = async (path: string) => {
+  // https://github.com/devcontainers/cli/issues/386
+  await rm(`${path}/.devcontainer/Dockerfile`);
+  console.log("cleaning up...");
+  await $({
+    cwd: path,
+    reject: false,
+    stdio: "ignore",
+  })`devcontainer up --remove-existing-container --workspace-folder ${tempPath}`;
+  await $$`docker network prune --force`;
+};
 
 await reset(tempPath);
-await $$`create-devcontainer typescript`;
-await $$`devcontainer up --remove-existing-container --workspace-folder ${tempPath}`;
-await $$`devcontainer exec --workspace-folder ${tempPath} pnpm lint`;
+try {
+  await $$`create-devcontainer csharp`;
+  await $$`devcontainer up --remove-existing-container --workspace-folder ${tempPath}`;
+  await $$`devcontainer exec --workspace-folder ${tempPath} pnpm lint`;
+} finally {
+  await cleanup(tempPath);
+}
 
-// https://github.com/devcontainers/cli/issues/386
-await rm(`${tempPath}/.devcontainer/Dockerfile`);
-console.log("cleaning up...");
-await $({
-  cwd: tempPath,
-  reject: false,
-  stdio: "ignore",
-})`devcontainer up --remove-existing-container --workspace-folder ${tempPath}`;
+try {
+  await reset(tempPath);
+  await $$`create-devcontainer typescript`;
+  await $$`devcontainer up --remove-existing-container --workspace-folder ${tempPath}`;
+  await $$`devcontainer exec --workspace-folder ${tempPath} pnpm lint`;
+} finally {
+  await cleanup(tempPath);
+}
+
+await reset(tempPath);

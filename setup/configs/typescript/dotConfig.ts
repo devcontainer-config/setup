@@ -13,7 +13,7 @@ export interface TypeScriptDotConfigs {
   ".config/cspell/cspell.json": string;
   ".config/typescript/tsconfig.node.json": string;
   ".config/eslint/tsconfig.json": string;
-  ".config/eslint/eslint.config.ts": string;
+  ".config/eslint/config.ts": string;
   ".config/workspaces/pnpm-workspace.yaml": string;
 }
 
@@ -25,7 +25,7 @@ export const createTypeScriptDotConfigs = async (
     ".config/cspell/cspell.json",
     ".config/typescript/tsconfig.node.json",
     ".config/eslint/tsconfig.json",
-    ".config/eslint/eslint.config.ts",
+    ".config/eslint/config.ts",
     ".config/workspaces/pnpm-workspace.yaml",
   ] satisfies (keyof TypeScriptDotConfigs)[]);
 
@@ -43,7 +43,7 @@ export const createTypeScriptDotConfigs = async (
       }),
     ),
     ".config/eslint/tsconfig.json": templates[".config/eslint/tsconfig.json"],
-    ".config/eslint/eslint.config.ts": templates[".config/eslint/eslint.config.ts"],
+    ".config/eslint/config.ts": templates[".config/eslint/config.ts"],
     ".config/workspaces/pnpm-workspace.yaml": fillTemplate(templates[".config/workspaces/pnpm-workspace.yaml"], {
       projectName,
     }),

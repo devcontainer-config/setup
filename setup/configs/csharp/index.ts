@@ -13,11 +13,8 @@ export type CSharpConfigs = CSharpDevContainerConfigs &
   CSharpAutomationConfigs &
   CSharpWorkspaceConfigs;
 
-export const createCSharpConfigs = async <T extends BaseConfigs>(
-  baseConfig: T,
-  remoteUser = "dev",
-): Promise<T & CSharpConfigs> => {
-  const devContainerConfigs = await createCSharpDevContainerConfigs(baseConfig, remoteUser);
+export const createCSharpConfigs = async <T extends BaseConfigs>(baseConfig: T): Promise<T & CSharpConfigs> => {
+  const devContainerConfigs = await createCSharpDevContainerConfigs(baseConfig);
   const dotConfigs = await createCSharpDotConfigs(baseConfig);
   const automationConfigs = await createCSharpAutomationConfigs();
   const workspaceConfigs = await createCSharpWorkspaceConfigs(baseConfig);
