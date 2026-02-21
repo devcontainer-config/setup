@@ -3,6 +3,7 @@
   "name": "${projectName}",
   "dockerComposeFile": "compose.yaml",
   "service": "devcontainer",
+  "containerUser": "${remoteUser}",
   "remoteUser": "${remoteUser}",
   "overrideCommand": true,
   "workspaceFolder": "/workspaces/${projectName}",
@@ -10,6 +11,18 @@
     "ghcr.io/devcontainer-config/features/user-init": {},
     "ghcr.io/devcontainer-config/features/dot-config": {}
   },
+  "mounts": [
+    {
+      "type": "bind",
+      "source": "${localWorkspaceFolder}",
+      "target": "/workspaces/${projectName}"
+    },
+    {
+      "type": "volume",
+      "source": "WORKSPACES",
+      "target": "/workspaces"
+    }
+  ],
   "customizations": {
     "vscode": {
       "extensions": ["esbenp.prettier-vscode", "ms-azuretools.vscode-docker", "streetsidesoftware.code-spell-checker"],

@@ -11,7 +11,6 @@ import { loadTemplates } from "../templates.js";
 import type { BaseDotConfigs } from "./dotConfig.js";
 
 export interface BaseDevContainerConfigs {
-  ".devcontainer/.env": string;
   ".devcontainer/devcontainer.json": string;
   ".devcontainer/compose.yaml": string;
   ".devcontainer/Dockerfile": string;
@@ -36,7 +35,6 @@ export const createBaseDevContainerConfigs = async (
   remoteUser: string,
 ): Promise<BaseDevContainerConfigs> => {
   const templatePaths = [
-    ".devcontainer/.env",
     ".devcontainer/devcontainer.json",
     ".devcontainer/compose.yaml",
     ".devcontainer/Dockerfile",
@@ -87,10 +85,9 @@ export const createBaseDevContainerConfigs = async (
   })();
 
   return {
-    ".devcontainer/.env": fillTemplate(templates[".devcontainer/.env"], { remoteUser }),
     ".devcontainer/devcontainer.json": devContainerConfig,
-    ".devcontainer/compose.yaml": fillTemplate(templates[".devcontainer/compose.yaml"], { projectName }),
+    ".devcontainer/compose.yaml": templates[".devcontainer/compose.yaml"],
     ".devcontainer/Dockerfile": dockerFile,
-    ".devcontainer/dot-config.json": fillTemplate(templates[".devcontainer/dot-config.json"], { remoteUser }),
+    ".devcontainer/dot-config.json": templates[".devcontainer/dot-config.json"],
   };
 };

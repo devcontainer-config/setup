@@ -8,8 +8,8 @@
   "overrideCommand": true,
   "workspaceFolder": "/workspaces/setup",
   "features": {
-    "ghcr.io/devcontainer-config/features/user-init:3.0.0-alpha1": {},
-    "ghcr.io/devcontainer-config/features/dot-config:4.0.0-alpha1": {},
+    "ghcr.io/devcontainer-config/features/user-init:3": {},
+    "ghcr.io/devcontainer-config/features/dot-config:4": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/dotnet:2": { "version": "10.0" }
   },
